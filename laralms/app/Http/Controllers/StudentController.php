@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Student;
+
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -32,7 +34,7 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
         Student::create($request->validated());
-        return redirect()->route('students.index');
+        return redirect() -> route('students.index');
     }
 
     /**
@@ -65,7 +67,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student->delete();
-        return redirect()->route('students.index');
+        Student::destroy($student['id']);
+        return redirect() -> route('students.index');
     }
 }
